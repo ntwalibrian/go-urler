@@ -8,7 +8,7 @@ import (
 )
 
 func helloHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello vercel by diouf ")
+	fmt.Fprintf(w, "<h1>Hello vercel by diouf </h1>")
 }
 
 func main() {
