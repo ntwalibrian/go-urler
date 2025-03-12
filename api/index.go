@@ -1,7 +1,6 @@
 package api
 
 import (
-	"fmt"
 	"net/http"
 	"encoding/json"
 	"github.com/gorilla/mux"
@@ -9,10 +8,6 @@ import (
 
 type RequestBody struct {
 	URL string `json:"url"`
-}
-
-func Handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "<h1> Hello vercel by diouf </h1>")
 }
 
 func Shorten(w http.ResponseWriter, r *http.Request) {
@@ -38,7 +33,7 @@ func Shorten(w http.ResponseWriter, r *http.Request) {
 
 	// Send response
 	json.NewEncoder(w).Encode(map[string]string{
-		"short_url": "http://localhost:8080/" + short,
+		"short_url": "https://go-urler.onrender.com" + short,
 	})
 
 }
@@ -63,12 +58,7 @@ func WebShorten(w http.ResponseWriter, r *http.Request) {
 
 	FileWrite(short, url)
 
-	http.Redirect(w, r, "/result?original_url=" + url + "&short_url=http://localhost:8080/" + short, http.StatusFound)
-
-	// Send response
-	// json.NewEncoder(w).Encode(map[string]string{
-	// 	"short_url": "http://localhost:8080/" + short,
-	// })
+	http.Redirect(w, r, "/result?original_url=" + url + "&short_url=https://go-urler.onrender.com" + short, http.StatusFound)
 
 }
 
