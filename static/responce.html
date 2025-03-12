@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./tailwind/output.css" rel="stylesheet">
+    <title>URLER</title>
+</head>
+<body class="flex justify-center items-center h-screen bg-blue-300">
+    <div class="bg-white shadow-lg rounded-2xl p-8 w-full max-w-xl text-center">
+        <h1 class="text-2xl font-semibold text-gray-800 mb-4">URLER</h1>
+    
+        <div id="resultContainer" class="bg-white shadow-lg rounded-2xl p-8 w-full max-w-xl text-center">
+            <p class="text-gray-600">Original URL : <a href="#" class="text-blue-500" id="originalUrl"></a></p>
+            <p id="originalUrl" class="text-blue-500 font-medium break-words"></p>
+            <p class="text-gray-600 mt-4">Shortened Version : <a href="#" class="text-green-500" id="shortenedUrl"></a></p>
+            <p id="shortUrl" class="text-green-500 font-medium break-words"></p>
+            <button onclick="goBack()" 
+                class="mt-6 w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition cursor-pointer">
+                Back
+            </button>
+        </div>
+        <p id="result" class="mt-4 text-green-600 font-medium hidden"></p>
+    </div>
+    <script>
+        // Get the query parameters from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const originalUrl = urlParams.get('original_url');
+        const shortUrl = urlParams.get('short_url');
+
+        // Display the original and shortened URL
+        if (originalUrl && shortUrl) {
+            document.getElementById('originalUrl').textContent = originalUrl;
+            document.getElementById('originalUrl').href = originalUrl
+            document.getElementById('shortenedUrl').textContent = shortUrl;
+            document.getElementById('shortenedUrl').href = shortUrl
+        } else {
+            document.getElementById('originalUrl').textContent = "No URL provided.";
+            document.getElementById('shortenedUrl').textContent = "Error: No shortened URL.";
+        }
+        
+        function goBack() {
+            window.location.href = "/";
+        }
+    </script>
+</body>
+</html>

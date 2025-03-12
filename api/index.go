@@ -41,6 +41,34 @@ func Shorten(w http.ResponseWriter, r *http.Request) {
 		"short_url": "http://localhost:8080/" + short,
 	})
 
+}
+
+func WebShorten(w http.ResponseWriter, r *http.Request) {
+
+	// Parse the form data
+	err := r.ParseForm()
+	if err != nil {
+		http.Error(w, "Failed to parse form data", http.StatusBadRequest)
+		return
+	}
+
+	// Extract URL from form data
+	url := r.FormValue("url")
+	if url == "" {
+		http.Error(w, "Missing URL in form data", http.StatusBadRequest)
+		return
+	}
+
+	short := RandKey(8)
+
+	FileWrite(short, url)
+
+	http.Redirect(w, r, "/result?original_url=" + url + "&short_url=http://localhost:8080/" + short, http.StatusFound)
+
+	// Send response
+	// json.NewEncoder(w).Encode(map[string]string{
+	// 	"short_url": "http://localhost:8080/" + short,
+	// })
 
 }
 
