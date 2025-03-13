@@ -8,6 +8,7 @@ import (
 	"html/template"
 	"github.com/gorilla/mux"
 	"github.com/ntwalibrian/urler/api"
+	// "github.com/ntwalibrian/urler/remotedb"
 )
 
 func resultPageHandler(w http.ResponseWriter, r *http.Request) {
@@ -42,6 +43,14 @@ func resultPageHandler(w http.ResponseWriter, r *http.Request) {
 
 
 func main() {
+	// remotedb.DBwrite("wwwwwww", "https://chatgpt.com/c/67d1ff97-8928-800d-bf15-999ef1664f87")
+
+	// results := remotedb.DBread()
+
+	// for k, v := range results{
+	// 	fmt.Printf("%v : %v", k,v)
+	// }
+
 	r := mux.NewRouter()
 	
 	r.HandleFunc("/shorten", api.Shorten).Methods("POST")
