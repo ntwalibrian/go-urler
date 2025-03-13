@@ -33,7 +33,7 @@ func Shorten(w http.ResponseWriter, r *http.Request) {
 
 	// Send response
 	json.NewEncoder(w).Encode(map[string]string{
-		"short_url": "https://go-urler.onrender.com" + short,
+		"short_url": "https://go-urler.onrender.com/" + short,
 	})
 
 }
@@ -58,7 +58,7 @@ func WebShorten(w http.ResponseWriter, r *http.Request) {
 
 	FileWrite(short, url)
 
-	http.Redirect(w, r, "/result?original_url=" + url + "&short_url=https://go-urler.onrender.com" + short, http.StatusFound)
+	http.Redirect(w, r, "/result?original_url=" + url + "&short_url=https://go-urler.onrender.com/" + short, http.StatusFound)
 
 }
 
