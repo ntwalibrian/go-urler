@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"encoding/json"
 	"github.com/gorilla/mux"
+	"github.com/ntwalibrian/urler/remotedb"
 )
 
 type RequestBody struct {
@@ -29,7 +30,8 @@ func Shorten(w http.ResponseWriter, r *http.Request) {
 
 	short := RandKey(8)
 
-	FileWrite(short, requestBody.URL)
+	// FileWrite(short, requestBody.URL)
+	remotedb.DBwrite(short, requestBody.URL)
 
 	// Send response
 	json.NewEncoder(w).Encode(map[string]string{
@@ -56,7 +58,8 @@ func WebShorten(w http.ResponseWriter, r *http.Request) {
 
 	short := RandKey(8)
 
-	FileWrite(short, url)
+	// FileWrite(short, url)
+	remotedb.DBwrite(short,url)
 
 	http.Redirect(w, r, "/result?original_url=" + url + "&short_url=https://go-urler.onrender.com/" + short, http.StatusFound)
 
@@ -66,7 +69,8 @@ func RedirectHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	shortKey := vars["shortKey"]
 
-	urlMappings := FileRead()
+	// urlMappings := FileRead()
+	urlMappings := remotedb.DBread()
 
 	// Check if the short key exists
 	if originalURL, exists := urlMappings[shortKey]; exists {
