@@ -43,13 +43,6 @@ func resultPageHandler(w http.ResponseWriter, r *http.Request) {
 
 
 func main() {
-	// remotedb.DBwrite("wwwwwww", "https://chatgpt.com/c/67d1ff97-8928-800d-bf15-999ef1664f87")
-
-	// results := remotedb.DBread()
-
-	// for k, v := range results{
-	// 	fmt.Printf("%v : %v", k,v)
-	// }
 
 	r := mux.NewRouter()
 	
@@ -68,7 +61,7 @@ func main() {
 
 	fmt.Printf("Starting server at port 8080 or on Render \n")
 
-	err := http.ListenAndServe(":"+port, r)
+	err := http.ListenAndServe("0.0.0.0:"+port, r)
 	if err != nil {
 		log.Fatalf("Server failed to start: %v", err)
 	}
